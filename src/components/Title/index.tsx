@@ -1,24 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text} from 'react-native';
 import styles from './styles';
 
 type Props = {
   text: string;
+  style?: Record<string | symbol, string | number>;
 };
 
-const Title = ({text}: Props) => {
-  const [title, setTitle] = useState<string>(text);
-
-  const pressHandler = () => {
-    setTitle('clicked the title');
-  };
-
-  return (
-    <Text onPress={pressHandler} style={styles.title}>
-      {title}
-    </Text>
-  );
-};
+const Title = ({text, style}: Props) => (
+  <Text style={[styles.title, style]}>{text}</Text>
+);
 
 Title.defaultProps = {
   text: 'Default text',
