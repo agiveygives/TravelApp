@@ -1,16 +1,18 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import styles from './styles';
 
 type Props = {
   title: string;
   location: string;
   imageSrc: string;
+  onPress: () => void;
 };
 
-const AttractionCard = ({title, location, imageSrc}: Props) => {
+const AttractionCard = ({title, location, imageSrc, onPress}: Props) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={onPress} style={styles.card}>
       <Image style={styles.image} source={{uri: imageSrc}} />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.locationContainer}>
@@ -20,7 +22,7 @@ const AttractionCard = ({title, location, imageSrc}: Props) => {
         />
         <Text style={styles.subtitle}>{location}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

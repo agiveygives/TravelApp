@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import AttractionCard from '../../components/AttractionCard';
 import Categories from '../../components/Categories';
 import Title from '../../components/Title';
 import styles from './styles';
 import attractionsJson from '../../data/attractions.json';
 import categoriesJson from '../../data/categories.json';
+import ScreenProps from '../../types/stackNavigation';
 
 const All = 'All';
 
 const Home = () => {
+  const {navigate} = useNavigation<ScreenProps<'Home'>>();
   const [selectedCategory, setSelectedCategory] = useState<string>(All);
   const [attractions, setAttractions] = useState<any>();
   const [categories, setCategories] = useState<string[]>([]);
@@ -58,6 +61,7 @@ const Home = () => {
         columnWrapperStyle={styles.gap}
         renderItem={({item}) => (
           <AttractionCard
+            onPress={() => navigate('AttractionDetails', {item})}
             title={item.name}
             location={item.city}
             imageSrc={item.images ? item.images[0] : ''}
